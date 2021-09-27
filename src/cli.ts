@@ -163,6 +163,18 @@ export async function run(verb: string, files: string[]): Promise<boolean> {
             stdio: 'inherit',
           }
         );
+        await execa(
+          'node',
+          [
+            './node_modules/prettier/bin/prettier',
+            '--write',
+            '**/*.json',
+            '**/.*.js',
+          ],
+          {
+            stdio: 'inherit',
+          }
+        );
         return true;
       } catch (e) {
         console.error(e);
