@@ -166,7 +166,7 @@ export async function run(verb: string, files: string[]): Promise<boolean> {
         await execa(
           'node',
           [
-            './node_modules/prettier/bin/prettier',
+            './node_modules/prettier/bin-prettier',
             '--write',
             '**/*.json',
             '**/.*.js',
