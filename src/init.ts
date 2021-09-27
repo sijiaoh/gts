@@ -38,6 +38,9 @@ const pkg = require('../../package.json');
 
 const ncpp = util.promisify(ncp);
 
+const projectTypes = ['ts', 'react', 'next.js'] as const;
+type ProjectType = typeof projectTypes[number];
+
 const DEFAULT_PACKAGE_JSON: PackageJson = {
   name: '',
   version: '0.0.0',
@@ -73,6 +76,30 @@ async function query(
     default: defaultVal,
   });
   return answers.query;
+}
+
+async function select(
+  message: string,
+  question: string,
+  choices: Readonly<string[]>,
+  options: Options
+): Promise<string> {
+  if (options.yes || options.no) {
+    return choices[0];
+  }
+
+  if (message) {
+    options.logger.log(message);
+  }
+
+  const answers = await inquirer.prompt({
+    type: 'list',
+    name: 'select',
+    message: question,
+    choices: choices,
+    default: choices[0],
+  });
+  return answers.select;
 }
 
 export async function addScripts(
@@ -233,12 +260,24 @@ async function generateESLintIgnore(options: Options): Promise<void> {
   return generateConfigFile(options, './.eslintignore', ESLINT_IGNORE);
 }
 
-async function generateTsConfig(options: Options): Promise<void> {
-  const config = formatJson({
+async function generateTsConfig(
+  projectType: ProjectType,
+  options: Options
+): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const obj: any = {
     extends: './node_modules/sijiaoh-gts/tsconfig-google.json',
     compilerOptions: {rootDir: '.', outDir: 'build', baseUrl: '.'},
     include: ['src/**/*.ts', 'test/**/*.ts'],
-  });
+  };
+  switch (projectType) {
+    case 'react':
+      obj.compilerOptions.jsx = 'react-jsx';
+      break;
+    case 'next.js':
+      return;
+  }
+  const config = formatJson(obj);
   return generateConfigFile(options, './tsconfig.json', config);
 }
 
@@ -306,6 +345,13 @@ export async function init(options: Options): Promise<boolean> {
     generatedPackageJson = true;
   }
 
+  const projectType = (await select(
+    '',
+    'Choice your project type',
+    projectTypes,
+    options
+  )) as ProjectType;
+
   const addedDeps = await addDependencies(packageJson, options);
   const addedScripts = await addScripts(packageJson, options);
   if (generatedPackageJson || addedDeps || addedScripts) {
@@ -313,7 +359,7 @@ export async function init(options: Options): Promise<boolean> {
   } else {
     options.logger.log('No edits needed in package.json.');
   }
-  await generateTsConfig(options);
+  await generateTsConfig(projectType, options);
   await generateESLintConfig(options);
   await generateESLintIgnore(options);
   await generatePrettierConfig(options);
