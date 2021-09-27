@@ -53,7 +53,7 @@ function hasExpectedScripts(packageJson: PackageJson): boolean {
 function hasExpectedDependencies(packageJson: PackageJson): boolean {
   return (
     !!packageJson.devDependencies &&
-    ['gts', 'typescript'].every(d => !!packageJson.devDependencies![d])
+    ['sijiaoh-gts', 'typescript'].every(d => !!packageJson.devDependencies![d])
   );
 }
 
@@ -123,7 +123,7 @@ describe('init', () => {
 
   it('addDependencies should not edit existing deps on no', async () => {
     const DEPS: DefaultPackage = {
-      gts: 'something',
+      'sijiaoh-gts': 'something',
       typescript: 'or the other',
       '@types/node': 'or another',
     };

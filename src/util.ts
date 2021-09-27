@@ -32,7 +32,7 @@ export interface Bag<T> {
 }
 
 export interface DefaultPackage extends Bag<string> {
-  gts: string;
+  'sijiaoh-gts': string;
   typescript: string;
   '@types/node': string;
 }

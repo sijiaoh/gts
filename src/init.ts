@@ -124,7 +124,7 @@ export async function addDependencies(
 ): Promise<boolean> {
   let edits = false;
   const deps: DefaultPackage = {
-    gts: `^${pkg.version}`,
+    'sijiaoh-gts': `^${pkg.version}`,
     typescript: pkg.devDependencies.typescript,
     '@types/node': pkg.devDependencies['@types/node'],
   };
