@@ -97,7 +97,7 @@ describe('🚰 kitchen sink', () => {
     const tsconfig = JSON.parse(tsconfigJson);
     assert.deepStrictEqual(
       tsconfig.extends,
-      './node_modules/gts/tsconfig-google.json'
+      './node_modules/sijiaoh-gts/tsconfig-google.json'
     );
 
     // server.ts has a lint error. Should error.
