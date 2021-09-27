@@ -225,7 +225,7 @@ async function generateESLintConfig(options: Options): Promise<void> {
   return generateConfigFile(
     options,
     './.eslintrc.js',
-    `module.exports = ${formatJson(ESLINT_CONFIG)};`
+    `module.exports = ${formatJson(ESLINT_CONFIG)};\n`
   );
 }
 
