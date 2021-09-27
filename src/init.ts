@@ -268,11 +268,12 @@ async function generateTsConfig(
   const obj: any = {
     extends: './node_modules/sijiaoh-gts/tsconfig-google.json',
     compilerOptions: {rootDir: '.', outDir: 'build', baseUrl: '.'},
-    include: ['src/**/*.ts', 'test/**/*.ts'],
+    include: ['**/*.ts'],
   };
   switch (projectType) {
     case 'react':
       obj.compilerOptions.jsx = 'react-jsx';
+      obj.include.push('**/*.tsx');
       break;
     case 'next.js':
       return;
