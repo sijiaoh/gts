@@ -236,7 +236,7 @@ async function generateESLintIgnore(options: Options): Promise<void> {
 async function generateTsConfig(options: Options): Promise<void> {
   const config = formatJson({
     extends: './node_modules/sijiaoh-gts/tsconfig-google.json',
-    compilerOptions: {rootDir: '.', outDir: 'build'},
+    compilerOptions: {rootDir: '.', outDir: 'build', baseUrl: '.'},
     include: ['src/**/*.ts', 'test/**/*.ts'],
   });
   return generateConfigFile(options, './tsconfig.json', config);
