@@ -53,7 +53,7 @@ Under the covers, we use [eslint][eslint-url] to enforce the style guide and pro
 ```yml
 ---
 extends:
-  - './node_modules/gts'
+  - './node_modules/sijiaoh-gts'
 ```
 
 If you don't want to use the `gts` CLI, you can drop down to using the module as a basic `eslint` config, and just use the `eslint` cli:
