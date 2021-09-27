@@ -168,6 +168,8 @@ export async function run(verb: string, files: string[]): Promise<boolean> {
           [
             './node_modules/prettier/bin-prettier',
             '--write',
+            '--ignore-path',
+            '.eslintignore',
             '**/*.json',
             '**/.*.js',
           ],
