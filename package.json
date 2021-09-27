@@ -1,6 +1,6 @@
 {
   "name": "sijiaoh-gts",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "sijiaoh TypeScript Style",
   "repository": "sijiaoh/gts",
   "main": "build/src/index.js",
