@@ -1,5 +1,5 @@
-# gts
-> Google TypeScript Style
+# sijiaoh-gts
+> sijiaoh TypeScript Style
 
 [![NPM Version][npm-image]][npm-url]
 [![GitHub Actions][github-image]][github-url]
@@ -22,6 +22,7 @@ Under the covers, we use [eslint][eslint-url] to enforce the style guide and pro
 
 The easiest way to get started is to run:
 ```sh
+npm install sijiaoh-gts
 npx gts init
 ```
 

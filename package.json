@@ -1,8 +1,8 @@
 {
-  "name": "gts",
-  "version": "3.1.0",
-  "description": "Google TypeScript Style",
-  "repository": "google/gts",
+  "name": "sijiaoh-gts",
+  "version": "0.0.0",
+  "description": "sijiaoh TypeScript Style",
+  "repository": "sijiaoh/gts",
   "main": "build/src/index.js",
   "bin": {
     "gts": "build/src/cli.js"
@@ -38,9 +38,9 @@
     "typescript",
     "linter",
     "formatter",
-    "google"
+    "sijiaoh"
   ],
-  "author": "Google Inc.",
+  "author": "sijiaoh",
   "license": "Apache-2.0",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.2.0",
