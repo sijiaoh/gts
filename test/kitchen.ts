@@ -62,7 +62,7 @@ describe('🚰 kitchen sink', () => {
 
     // Ensure config files got generated.
     fs.accessSync(path.join(kitchenPath, 'tsconfig.json'));
-    fs.accessSync(path.join(kitchenPath, '.eslintrc.json'));
+    fs.accessSync(path.join(kitchenPath, '.eslintrc.js'));
     fs.accessSync(path.join(kitchenPath, '.eslintignore'));
     fs.accessSync(path.join(kitchenPath, '.prettierrc.js'));
 
@@ -123,7 +123,7 @@ describe('🚰 kitchen sink', () => {
     );
     assert.ok(
       fs
-        .readFileSync(path.join(kitchenPath, '.eslintrc.json'), 'utf8')
+        .readFileSync(path.join(kitchenPath, '.eslintrc.js'), 'utf8')
         .endsWith('\n')
     );
     assert.ok(
