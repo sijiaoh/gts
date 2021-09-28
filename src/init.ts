@@ -267,7 +267,12 @@ async function generateTsConfig(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const obj: any = {
     extends: './node_modules/sijiaoh-gts/tsconfig-google.json',
-    compilerOptions: {rootDir: '.', outDir: 'build', baseUrl: '.'},
+    compilerOptions: {
+      rootDir: '.',
+      outDir: 'build',
+      baseUrl: '.',
+      esModuleInterop: true,
+    },
     include: ['**/*.ts'],
   };
   switch (projectType) {
