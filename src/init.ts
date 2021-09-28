@@ -276,10 +276,11 @@ async function generateTsConfig(
   if (projectType === 'next.js') return;
 
   const postfix = projectType === 'react' ? '-react' : '';
+  const additionalInclude = projectType === 'react' ? ['**/*.tsx'] : [];
   const config = formatJson({
     extends: `./node_modules/sijiaoh-gts/tsconfig-google${postfix}.json`,
     compilerOptions: {rootDir: '.', outDir: 'build'},
-    include: ['**/*.ts', '**/*.ts'],
+    include: ['**/*.ts', ...additionalInclude],
   });
   return generateConfigFile(options, './tsconfig.json', config);
 }
