@@ -248,11 +248,27 @@ async function generateConfigFile(
   }
 }
 
-async function generateESLintConfig(options: Options): Promise<void> {
+async function generateESLintConfig(
+  projectType: ProjectType,
+  options: Options
+): Promise<void> {
+  let config: {extends: string} | undefined;
+  const reactConfig = {
+    extends: './node_modules/sijiaoh-gts/build/src/react',
+  };
+  switch (projectType) {
+    case 'ts':
+      config = ESLINT_CONFIG;
+      break;
+    case 'react':
+    case 'next.js':
+      config = reactConfig;
+      break;
+  }
   return generateConfigFile(
     options,
     './.eslintrc.js',
-    `module.exports = ${formatJson(ESLINT_CONFIG)};\n`
+    `module.exports = ${formatJson(config)};\n`
   );
 }
 
@@ -366,7 +382,7 @@ export async function init(options: Options): Promise<boolean> {
     options.logger.log('No edits needed in package.json.');
   }
   await generateTsConfig(projectType, options);
-  await generateESLintConfig(options);
+  await generateESLintConfig(projectType, options);
   await generateESLintIgnore(options);
   await generatePrettierConfig(options);
   await installDefaultTemplate(options);
