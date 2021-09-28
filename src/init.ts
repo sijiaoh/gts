@@ -204,9 +204,9 @@ async function writePackageJson(
   options.logger.dir(preview);
 }
 
-export const ESLINT_CONFIG = {
-  extends: './node_modules/sijiaoh-gts/',
-};
+export const getEslintConfig = (path: string) => ({
+  extends: `./node_modules/sijiaoh-gts/${path}`,
+});
 
 export const ESLINT_IGNORE = 'build/\n';
 
@@ -252,23 +252,16 @@ async function generateESLintConfig(
   projectType: ProjectType,
   options: Options
 ): Promise<void> {
-  let config: {extends: string} | undefined;
-  const reactConfig = {
-    extends: './node_modules/sijiaoh-gts/build/src/react',
-  };
+  let path = '';
   switch (projectType) {
-    case 'ts':
-      config = ESLINT_CONFIG;
-      break;
     case 'react':
-    case 'next.js':
-      config = reactConfig;
+      path = 'build/src/react';
       break;
   }
   return generateConfigFile(
     options,
     './.eslintrc.js',
-    `module.exports = ${formatJson(config)};\n`
+    `module.exports = ${formatJson(getEslintConfig(path))};\n`
   );
 }
 
@@ -280,26 +273,14 @@ async function generateTsConfig(
   projectType: ProjectType,
   options: Options
 ): Promise<void> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const obj: any = {
-    extends: './node_modules/sijiaoh-gts/tsconfig-google.json',
-    compilerOptions: {
-      rootDir: '.',
-      outDir: 'build',
-      baseUrl: '.',
-      esModuleInterop: true,
-    },
-    include: ['**/*.ts'],
-  };
-  switch (projectType) {
-    case 'react':
-      obj.compilerOptions.jsx = 'react-jsx';
-      obj.include.push('**/*.tsx');
-      break;
-    case 'next.js':
-      return;
-  }
-  const config = formatJson(obj);
+  if (projectType === 'next.js') return;
+
+  const postfix = projectType === 'react' ? '-react' : '';
+  const config = formatJson({
+    extends: `./node_modules/sijiaoh-gts/tsconfig-google${postfix}.json`,
+    compilerOptions: {rootDir: '.', outDir: 'build'},
+    include: ['**/*.ts', '**/*.ts'],
+  });
   return generateConfigFile(options, './tsconfig.json', config);
 }
 

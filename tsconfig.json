@@ -3,14 +3,8 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",
+    "esModuleInterop": false,
     "resolveJsonModule": true
   },
-  "include": [
-    "src/**/*.ts",
-    "test/**/*.ts"
-  ],
-  "exclude": [
-    "test/fixtures/**/*.*",
-    "template/**/*.*",
-  ]
+  "exclude": ["build", "test/fixtures/**/*.*", "template/**/*.*"]
 }
