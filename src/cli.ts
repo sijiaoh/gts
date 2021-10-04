@@ -21,7 +21,7 @@ import * as meow from 'meow';
 import * as updateNotifier from 'update-notifier';
 import {init} from './init';
 import {clean} from './clean';
-import {isYarnUsed} from './util';
+import {isYarnUsed, projectRootRelativePath} from './util';
 import * as execa from 'execa';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -145,9 +145,16 @@ export async function run(verb: string, files: string[]): Promise<boolean> {
     case 'lint':
     case 'check': {
       try {
-        await execa('node', ['./node_modules/eslint/bin/eslint', ...flags], {
-          stdio: 'inherit',
-        });
+        await execa(
+          'node',
+          [
+            `${projectRootRelativePath}/node_modules/eslint/bin/eslint`,
+            ...flags,
+          ],
+          {
+            stdio: 'inherit',
+          }
+        );
         return true;
       } catch (e) {
         return false;
@@ -158,7 +165,11 @@ export async function run(verb: string, files: string[]): Promise<boolean> {
       try {
         await execa(
           'node',
-          ['./node_modules/eslint/bin/eslint', fixFlag, ...flags],
+          [
+            `${projectRootRelativePath}/node_modules/eslint/bin/eslint`,
+            fixFlag,
+            ...flags,
+          ],
           {
             stdio: 'inherit',
           }
@@ -166,7 +177,7 @@ export async function run(verb: string, files: string[]): Promise<boolean> {
         await execa(
           'node',
           [
-            './node_modules/prettier/bin-prettier',
+            `${projectRootRelativePath}/node_modules/prettier/bin-prettier`,
             '--write',
             '--ignore-path',
             '.eslintignore',

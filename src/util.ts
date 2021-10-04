@@ -27,6 +27,11 @@ export const rimrafp = promisify(rimraf);
 export const writeFileAtomicp = promisify(writeFileAtomic);
 export const ncpp = promisify(ncp.ncp);
 
+const INIT_CWD = process.env.INIT_CWD;
+const PROJECT_CWD = process.env.PROJECT_CWD;
+export const projectRootRelativePath =
+  INIT_CWD && PROJECT_CWD ? path.relative(INIT_CWD, PROJECT_CWD) : '.';
+
 export interface Bag<T> {
   [script: string]: T;
 }
@@ -141,6 +146,7 @@ export function isYarnUsed(existsSync = fs.existsSync): boolean {
   if (existsSync('package-lock.json')) {
     return false;
   }
+  if (INIT_CWD) return true;
   return existsSync('yarn.lock');
 }
 

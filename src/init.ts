@@ -27,6 +27,7 @@ import {
   writeFileAtomicp as write,
   Bag,
   DefaultPackage,
+  projectRootRelativePath,
 } from './util';
 
 import {Options} from './cli';
@@ -205,7 +206,7 @@ async function writePackageJson(
 }
 
 export const getEslintConfig = (path: string) => ({
-  extends: `./node_modules/sijiaoh-gts/${path}`,
+  extends: `${projectRootRelativePath}/node_modules/sijiaoh-gts/${path}`,
 });
 
 export const ESLINT_IGNORE = 'build/\n';
@@ -278,7 +279,7 @@ async function generateTsConfig(
   const postfix = projectType === 'react' ? '-react' : '';
   const additionalInclude = projectType === 'react' ? ['**/*.tsx'] : [];
   const config = formatJson({
-    extends: `./node_modules/sijiaoh-gts/tsconfig-google${postfix}.json`,
+    extends: `${projectRootRelativePath}/node_modules/sijiaoh-gts/tsconfig-google${postfix}.json`,
     compilerOptions: {rootDir: '.', outDir: 'build'},
     include: ['**/*.ts', ...additionalInclude],
   });
