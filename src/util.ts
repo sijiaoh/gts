@@ -30,7 +30,7 @@ export const ncpp = promisify(ncp.ncp);
 const INIT_CWD = process.env.INIT_CWD;
 const PROJECT_CWD = process.env.PROJECT_CWD;
 export const projectRootRelativePath =
-  INIT_CWD && PROJECT_CWD ? path.relative(INIT_CWD, PROJECT_CWD) : '.';
+  INIT_CWD && PROJECT_CWD ? path.relative(INIT_CWD, PROJECT_CWD) || '.' : '.';
 
 export interface Bag<T> {
   [script: string]: T;
