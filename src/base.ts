@@ -5,10 +5,19 @@ export const base = {
   overrides: [
     ...cfg.overrides,
     {
+      files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
+      extends: ['plugin:import/recommended'],
+      rules: {
+        'import/no-default-export': 'error',
+        'import/order': ['error', {alphabetize: {order: 'asc'}}],
+      },
+    },
+    {
       files: ['**/*.ts', '**/*.tsx'],
       parserOptions: {
         project: 'tsconfig.json',
       },
+      extends: ['plugin:import/typescript'],
       rules: {
         '@typescript-eslint/await-thenable': 'error',
         'require-await': 'off',
