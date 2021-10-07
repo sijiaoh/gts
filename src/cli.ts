@@ -155,6 +155,20 @@ export async function run(verb: string, files: string[]): Promise<boolean> {
             stdio: 'inherit',
           }
         );
+        await execa(
+          'node',
+          [
+            `${projectRootRelativePath}/node_modules/prettier/bin-prettier`,
+            '--check',
+            '--ignore-path',
+            '.eslintignore',
+            '**/*.json',
+            '**/.*.js',
+          ],
+          {
+            stdio: 'inherit',
+          }
+        );
         return true;
       } catch (e) {
         return false;
