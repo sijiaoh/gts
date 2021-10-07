@@ -27,5 +27,20 @@ export const base = {
         '@typescript-eslint/promise-function-async': 'error',
       },
     },
+    {
+      files: [
+        'test/**/*.js',
+        'test/**/*.jsx',
+        'test/**/*.ts',
+        'test/**/*.tsx',
+        '**/*.test.js',
+        '**/*.test.jsx',
+        '**/*.test.ts',
+        '**/*.test.tsx',
+      ],
+      rules: {
+        'node/no-unpublished-import': 'off',
+      },
+    },
   ],
 };
