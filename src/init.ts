@@ -259,6 +259,9 @@ async function generateESLintConfig(
     case 'react':
       path = 'build/src/react';
       break;
+    case 'next.js':
+      path = 'build/src/next';
+      break;
   }
   return generateConfigFile(
     options,
