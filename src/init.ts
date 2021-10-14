@@ -219,7 +219,8 @@ async function generateConfigFile(
   let existing;
   try {
     existing = await read(filename, 'utf8');
-  } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
     if (err.code === 'ENOENT') {
       /* not found, create it. */
     } else {
@@ -303,7 +304,8 @@ export async function installDefaultTemplate(
 
   try {
     fs.mkdirSync(targetDirName);
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     if (error.code !== 'EEXIST') {
       throw error;
     }
@@ -330,7 +332,8 @@ export async function init(options: Options): Promise<boolean> {
   let packageJson;
   try {
     packageJson = await readJson('./package.json');
-  } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
     if (err.code !== 'ENOENT') {
       throw new Error(`Unable to open package.json file: ${err.message}`);
     }

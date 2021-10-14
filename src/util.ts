@@ -86,7 +86,8 @@ async function getBase(
     let contents: any;
     try {
       contents = JSON5.parse(json);
-    } catch (e) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
       e.message = `Unable to parse ${filePath}!\n${e.message}`;
       throw e;
     }
@@ -102,7 +103,8 @@ async function getBase(
     }
 
     return contents;
-  } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
     err.message = `Error: ${filePath}\n${err.message}`;
     throw err;
   }
@@ -167,7 +169,7 @@ export async function getTSConfig(
   rootDir: string,
   customReadFilep?: ReadFileP
 ): Promise<ConfigFile> {
-  customReadFilep = customReadFilep || readFilep;
+  customReadFilep = customReadFilep || (readFilep as ReadFileP);
   const readArr = new Set<string>();
   return getBase('tsconfig.json', customReadFilep, readArr, rootDir);
 }
