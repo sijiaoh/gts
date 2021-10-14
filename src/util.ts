@@ -148,8 +148,12 @@ export function isYarnUsed(existsSync = fs.existsSync): boolean {
   if (existsSync('package-lock.json')) {
     return false;
   }
-  if (INIT_CWD) return true;
+  if (isYarn2()) return true;
   return existsSync('yarn.lock');
+}
+
+export function isYarn2(): boolean {
+  return !!INIT_CWD;
 }
 
 export function getPkgManagerCommand(isYarnUsed?: boolean): string {

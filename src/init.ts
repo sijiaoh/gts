@@ -28,6 +28,7 @@ import {
   Bag,
   DefaultPackage,
   projectRootRelativePath,
+  isYarn2,
 } from './util';
 
 import {Options} from './cli';
@@ -383,7 +384,7 @@ export async function init(options: Options): Promise<boolean> {
 
     cp.spawnSync(
       getPkgManagerCommand(options.yarn),
-      ['install', '--ignore-scripts'],
+      ['install', isYarn2() ? '--binaries-only' : '--ignore-scripts'],
       {stdio: 'inherit'}
     );
   }
