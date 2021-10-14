@@ -112,10 +112,10 @@ export async function addScripts(
   const scripts: Bag<string> = {
     lint: 'gts lint',
     clean: 'gts clean',
-    compile: 'tsc',
+    build: 'tsc',
     fix: 'gts fix',
-    prepare: `${pkgManager} run compile`,
-    pretest: `${pkgManager} run compile`,
+    prepare: `${pkgManager} run build`,
+    pretest: `${pkgManager} run build`,
     posttest: `${pkgManager} run lint`,
   };
 
