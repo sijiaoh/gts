@@ -34,7 +34,7 @@ When you run the `npx gts init` command, it's going to do a few things for you:
   - `lint`: Lints and checks for formatting problems.
   - `fix`: Automatically fixes formatting and linting problems (if possible).
   - `clean`: Removes output files.
-  - `compile`: Compiles the source code using TypeScript compiler.
+  - `build`: Compiles the source code using TypeScript compiler.
   - `pretest`, `posttest` and `prepare`: convenience integrations.
 - If a source folder is not already present it will add a default template project.
 

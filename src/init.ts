@@ -113,7 +113,7 @@ export async function addScripts(
   const scripts: Bag<string> = {
     lint: 'gts lint',
     clean: 'gts clean',
-    build: 'tsc',
+    build: 'tsc --project tsconfig.build.json',
     fix: 'gts fix',
     prepare: `${pkgManager} run build`,
     pretest: `${pkgManager} run build`,
@@ -281,6 +281,12 @@ async function generateTsConfig(
 ): Promise<void> {
   if (projectType === 'next.js') return;
 
+  const buildConfig = formatJson({
+    extends: './tsconfig.json',
+    exclude: ['build', '**/*.test.ts', '**/*.test.tsx'],
+  });
+  await generateConfigFile(options, './tsconfig.build.json', buildConfig);
+
   const postfix = projectType === 'react' ? '-react' : '';
   const additionalInclude = projectType === 'react' ? ['**/*.tsx'] : [];
   const config = formatJson({
@@ -288,7 +294,7 @@ async function generateTsConfig(
     compilerOptions: {rootDir: '.', outDir: 'build'},
     include: ['**/*.ts', ...additionalInclude],
   });
-  return generateConfigFile(options, './tsconfig.json', config);
+  await generateConfigFile(options, './tsconfig.json', config);
 }
 
 async function generatePrettierConfig(options: Options): Promise<void> {

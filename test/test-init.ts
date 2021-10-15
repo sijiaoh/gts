@@ -44,7 +44,7 @@ const MINIMAL_PACKAGE_JSON = {name: 'name', version: 'v1.1.1'};
 function hasExpectedScripts(packageJson: PackageJson): boolean {
   return (
     !!packageJson.scripts &&
-    ['lint', 'clean', 'compile', 'fix', 'prepare', 'pretest', 'posttest'].every(
+    ['lint', 'clean', 'build', 'fix', 'prepare', 'pretest', 'posttest'].every(
       s => !!packageJson.scripts![s]
     )
   );
@@ -80,10 +80,10 @@ describe('init', () => {
     const SCRIPTS = {
       lint: 'fake lint',
       clean: 'fake clean',
-      compile: 'fake tsc',
+      build: 'fake tsc --project tsconfig.build.json',
       fix: 'fake fix',
-      prepare: 'fake run compile',
-      pretest: 'fake run compile',
+      prepare: 'fake run build',
+      pretest: 'fake run build',
       posttest: 'fake run lint',
     };
     const pkg: PackageJson = {
@@ -99,10 +99,10 @@ describe('init', () => {
     const SCRIPTS = {
       lint: 'fake lint',
       clean: 'fake clean',
-      compile: 'fake tsc',
+      build: 'fake tsc --project tsconfig.build.json',
       fix: 'fake fix',
-      prepare: 'fake run compile',
-      pretest: 'fake run compile',
+      prepare: 'fake run build',
+      pretest: 'fake run build',
       posttest: 'fake run lint',
     };
     const pkg: PackageJson = {
@@ -194,7 +194,7 @@ describe('init', () => {
 
         const contents = await readJson('./package.json');
         const cmd = process.platform === 'win32' ? 'yarn.cmd' : 'yarn';
-        assert.strictEqual(contents.scripts.prepare, cmd + ' run compile');
+        assert.strictEqual(contents.scripts.prepare, cmd + ' run build');
       }
     );
   });
