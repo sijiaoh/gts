@@ -390,7 +390,7 @@ export async function init(options: Options): Promise<boolean> {
 
     cp.spawnSync(
       getPkgManagerCommand(options.yarn),
-      ['install', isYarn2() ? '--binaries-only' : '--ignore-scripts'],
+      ['install', ...(isYarn2() ? [] : ['--ignore-scripts'])],
       {stdio: 'inherit'}
     );
   }
