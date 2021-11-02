@@ -4,7 +4,8 @@
     "rootDir": ".",
     "outDir": "build",
     "esModuleInterop": false,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "noUncheckedIndexedAccess": false
   },
   "exclude": ["build", "test/fixtures/**/*.*", "template/**/*.*"]
 }
