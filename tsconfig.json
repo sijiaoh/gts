@@ -5,7 +5,8 @@
     "outDir": "build",
     "esModuleInterop": false,
     "resolveJsonModule": true,
-    "noUncheckedIndexedAccess": false
+    "noUncheckedIndexedAccess": false,
+    "importsNotUsedAsValues": "remove"
   },
   "exclude": ["build", "test/fixtures/**/*.*", "template/**/*.*"]
 }
