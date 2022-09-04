@@ -13,12 +13,9 @@ const pkg = require('../../package.json');
 const keep = !!process.env.GTS_KEEP_TEMPDIRS;
 const stagingDir = tmp.dirSync({keep, unsafeCleanup: true});
 const stagingPath = stagingDir.name;
-const execOpts: Pick<
-  cp.SpawnSyncOptionsWithStringEncoding,
-  'cwd' | 'encoding'
-> = {
+const execOpts = {
   cwd: `${stagingPath}${path.sep}kitchen`,
-  encoding: 'utf8',
+  encoding: 'utf8' as BufferEncoding,
 };
 
 describe('🚰 kitchen sink', () => {
@@ -65,6 +62,7 @@ describe('🚰 kitchen sink', () => {
     fs.accessSync(path.join(kitchenPath, '.eslintrc.js'));
     fs.accessSync(path.join(kitchenPath, '.eslintignore'));
     fs.accessSync(path.join(kitchenPath, '.prettierrc.js'));
+    fs.accessSync(path.join(kitchenPath, '.editorconfig'));
 
     // NOTE: This test case is broken.
     // Compilation shouldn't have happened. Hence no `build` directory.
